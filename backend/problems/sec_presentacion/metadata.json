@@ -1,0 +1,15 @@
+{
+  "title": "Presentación completa",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-secuenciales",
+  "difficulty": "easy",
+  "tags": ["strings", "input-multiple", "concatenacion"],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Necesitas leer CUATRO datos: nombre, apellido, edad y ciudad. Usa input() cuatro veces.",
+    "Guarda cada valor en una variable diferente (nombre, apellido, edad, ciudad).",
+    "Usa f-strings para crear el mensaje: f'Soy {nombre} {apellido}, tengo {edad} años y vivo en {ciudad}'",
+    "Asegúrate de seguir el formato exacto con comas, espacios y la palabra 'años'."
+  ]
+}

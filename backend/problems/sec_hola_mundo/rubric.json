@@ -1,0 +1,65 @@
+{
+  "tests": [
+    {
+      "name": "test_main_function_exists",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_salida_exacta",
+      "points": 3,
+      "visibility": "public"
+    },
+    {
+      "name": "test_comienza_con_hola",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_termina_con_exclamacion",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_contiene_mundo",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_mayuscula_hola",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_mayuscula_mundo",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_sin_saltos_extra",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_salida_consistente_multiple_ejecuciones",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_formato_exacto_sin_espacios_extra",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_sin_caracteres_extra",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_espacio_entre_palabras",
+      "points": 2,
+      "visibility": "hidden"
+    }
+  ],
+  "max_points": 18
+}

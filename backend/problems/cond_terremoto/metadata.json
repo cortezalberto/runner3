@@ -1,0 +1,20 @@
+{
+  "title": "Clasificación de terremoto",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-condicionales",
+  "difficulty": "hard",
+  "tags": [
+    "condicionales",
+    "elif",
+    "multiples-rangos",
+    "escala-richter"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Los tests verifican que exista una función clasificar_terremoto(magnitud). Debe recibir un número decimal (float) y retornar la clasificación como string.",
+    "⚠️ LÍMITES DE RANGOS: Los tests verifican 6 categorías distintas basadas en rangos: <3 ('Muy leve'), 3-4 ('Leve'), 4-5 ('Moderado'), 5-6 ('Fuerte'), 6-7 ('Muy Fuerte'), ≥7 ('Extremo').",
+    "Necesitas múltiples if-elif con comparaciones de rangos. Los tests usan valores específicos: 2.5, 3.7, 4.8, 5.5, 6.3, 8.0. Usa >= y < para definir los límites correctamente.",
+    "Formato EXACTO: Los tests verifican strings como 'Muy leve', 'Leve', 'Moderado', 'Fuerte', 'Muy Fuerte', 'Extremo' (respeta mayúsculas exactas y espacios)."
+  ]
+}

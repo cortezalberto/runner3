@@ -1,0 +1,125 @@
+{
+  "tests": [
+    {
+      "name": "test_main_function_exists",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_promedio_ejemplo",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_promedio_numeros_iguales",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_promedio_con_cero",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_promedios_varios",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_promedio_decimal_simple",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_promedio_con_decimales",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_promedios_consecutivos",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_mensaje_completo",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_incluye_resultado",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_numeros_decimales_entrada",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_promedio_decimal_precision",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_promedio_con_negativos",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_promedio_todos_negativos",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_varios_negativos",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_numeros_grandes",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_numeros_muy_grandes",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_todos_ceros",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_dos_ceros",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_precision_decimales",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_promedio_no_entero",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_promedio_con_tercios",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_valores_mixtos",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_valores_mixtos_positivos_negativos",
+      "points": 1,
+      "visibility": "hidden"
+    }
+  ],
+  "max_points": 31
+}

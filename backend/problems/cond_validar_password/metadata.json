@@ -1,0 +1,19 @@
+{
+  "title": "Validar contraseña",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-condicionales",
+  "difficulty": "easy",
+  "tags": [
+    "condicionales",
+    "strings",
+    "len"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Los tests verifican que exista una función validar_password(password). Debe recibir un string y retornar un mensaje de validación.",
+    "⚠️ LÍMITES CRÍTICOS: Los tests verifican los bordes 8 y 14 caracteres. Casos: 8 caracteres (válido), 14 caracteres (válido), 6 caracteres (inválido), 16 caracteres (inválido).",
+    "Usa len(password) para obtener la longitud. La condición correcta es: 8 <= len(password) <= 14 (incluye ambos límites). Los tests verifican estos valores exactos.",
+    "Formato EXACTO: Válida → 'Ha ingresado una contraseña correcta', Inválida → 'Por favor, ingrese una contraseña de entre 8 y 14 caracteres' (respeta el texto completo)."
+  ]
+}

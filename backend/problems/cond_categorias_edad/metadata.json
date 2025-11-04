@@ -1,0 +1,19 @@
+{
+  "title": "Categorías de edad",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-condicionales",
+  "difficulty": "medium",
+  "tags": [
+    "condicionales",
+    "elif",
+    "multiples-condiciones"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Los tests verifican que exista una función categoria_edad(edad). Revisa los tests: test_existe_funcion busca esta función específica.",
+    "⚠️ CATEGORÍAS CRÍTICAS: Los tests verifican 4 categorías distintas: 'Niño/a' (edad 8), 'Adolescente' (edad 15), 'Adulto/a joven' (edad 25), 'Adulto/a' (edad 40).",
+    "Necesitas usar múltiples condicionales con if-elif-else para verificar rangos de edad. Los tests probarán valores específicos en cada categoría.",
+    "Formato EXACTO: Los tests verifican strings como 'Niño/a', 'Adolescente', 'Adulto/a joven', 'Adulto/a' (respeta mayúsculas, acentos y el formato 'a/o')."
+  ]
+}

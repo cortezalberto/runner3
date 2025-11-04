@@ -1,0 +1,60 @@
+{
+  "tests": [
+    {
+      "name": "test_main_function_exists",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_radio_uno",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_radio_cinco",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_radios_decimales",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_radio_cero",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_radio_grande",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_dos_lineas_salida",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_valores_numericos",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_precision_decimales",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_radio_muy_grande",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_radios_pequenos",
+      "points": 1,
+      "visibility": "hidden"
+    }
+  ],
+  "max_points": 15
+}

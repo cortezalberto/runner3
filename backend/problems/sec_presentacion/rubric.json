@@ -1,0 +1,45 @@
+{
+  "tests": [
+    {
+      "name": "test_main_function_exists",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_presentaciones_basicas",
+      "points": 3,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_comienza_con_soy",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_contiene_tengo_anos",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_contiene_vivo_en",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_diferentes_edades",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_nombres_compuestos",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_ciudad_con_espacios",
+      "points": 2,
+      "visibility": "hidden"
+    }
+  ],
+  "max_points": 14
+}

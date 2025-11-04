@@ -1,0 +1,18 @@
+{
+  "title": "Conversión de segundos a horas",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-secuenciales",
+  "difficulty": "easy",
+  "tags": [
+    "conversiones",
+    "division"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Lee la cantidad de segundos con input() y conviértela a int().",
+    "Para convertir segundos a horas, divide entre 3600.",
+    "Usa print() para mostrar el resultado con el formato: '{segundos} segundos equivalen a {horas} horas'",
+    "El resultado de la división será un float (puede tener decimales)."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Área y perímetro de un círculo",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-secuenciales",
+  "difficulty": "easy",
+  "tags": [
+    "matematica",
+    "pi",
+    "formulas"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Importa el módulo math para obtener math.pi con: import math",
+    "Lee el radio con input() y conviértelo a float().",
+    "Calcula el área con: math.pi * radio ** 2",
+    "Calcula el perímetro con: 2 * math.pi * radio"
+  ]
+}

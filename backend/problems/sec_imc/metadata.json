@@ -1,0 +1,19 @@
+{
+  "title": "Índice de Masa Corporal",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-secuenciales",
+  "difficulty": "easy",
+  "tags": [
+    "salud",
+    "formulas",
+    "decimales"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Lee altura y peso con input(), conviértelos a float().",
+    "La fórmula del IMC es: peso / altura²  o  peso / (altura ** 2)",
+    "Usa :.2f en el f-string para mostrar solo 2 decimales.",
+    "Formato de salida: 'Tu índice de masa corporal (IMC) es: {imc:.2f}'"
+  ]
+}

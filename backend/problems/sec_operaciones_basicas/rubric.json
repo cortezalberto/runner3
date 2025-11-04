@@ -1,0 +1,75 @@
+{
+  "tests": [
+    {
+      "name": "test_main_function_exists",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_operaciones_10_y_2",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_operaciones_6_y_3",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_etiquetas_presentes",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_diferentes_numeros",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_division_con_decimales",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_operaciones_con_decimales",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_cuatro_lineas_exactas",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_resta_negativa",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_numeros_negativos",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_numeros_grandes",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_division_por_cero_especial",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_cero_como_primer_numero",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_decimales_precision",
+      "points": 2,
+      "visibility": "hidden"
+    }
+  ],
+  "max_points": 22
+}

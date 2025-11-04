@@ -1,0 +1,18 @@
+{
+  "title": "Promedio de tres números",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-secuenciales",
+  "difficulty": "easy",
+  "tags": [
+    "promedio",
+    "aritmetica"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Lee tres números con input(), conviértelos a float().",
+    "El promedio se calcula sumando los tres y dividiendo entre 3.",
+    "Usa la fórmula: promedio = (num1 + num2 + num3) / 3",
+    "Formato de salida: 'El promedio de los tres números es: {promedio}'"
+  ]
+}

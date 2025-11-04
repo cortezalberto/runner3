@@ -1,0 +1,90 @@
+{
+  "tests": [
+    {
+      "name": "test_main_function_exists",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_imc_ejemplo",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_imc_valor_bajo",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_imc_valor_alto",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_dos_decimales",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_varios_casos_formato",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_mensaje_completo",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_altura_baja",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_altura_alta",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_imc_muy_bajo",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_imc_muy_alto",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_precision_calculo",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_altura_muy_baja",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_altura_muy_alta",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_redondeo_hacia_arriba",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_redondeo_hacia_abajo",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_mismo_altura_diferentes_pesos",
+      "points": 2,
+      "visibility": "hidden"
+    }
+  ],
+  "max_points": 26
+}

@@ -1,0 +1,55 @@
+{
+  "tests": [
+    {
+      "name": "test_main_function_exists",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_conversion_3600_segundos",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_conversion_7200_segundos",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_conversiones_varias",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_cero_segundos",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_un_segundo",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_incluye_equivalen",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_incluye_segundos",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_valores_grandes",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_resultados_decimales",
+      "points": 2,
+      "visibility": "hidden"
+    }
+  ],
+  "max_points": 15
+}

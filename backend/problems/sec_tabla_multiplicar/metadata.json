@@ -1,0 +1,18 @@
+{
+  "title": "Tabla de multiplicar",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-secuenciales",
+  "difficulty": "easy",
+  "tags": [
+    "multiplicacion",
+    "tablas"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Lee el número con input() y conviértelo a int().",
+    "Debes imprimir 10 líneas, cada una con: 'numero x multiplicador = resultado'.",
+    "Calcula cada multiplicación por separado (sin usar ciclos): resultado1 = numero * 1, resultado2 = numero * 2, etc.",
+    "Usa f-strings para imprimir cada línea: print(f'{numero} x 1 = {resultado1}')"
+  ]
+}

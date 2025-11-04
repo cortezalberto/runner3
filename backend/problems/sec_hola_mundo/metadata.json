@@ -1,0 +1,19 @@
+{
+  "title": "Hola Mundo",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-secuenciales",
+  "difficulty": "easy",
+  "tags": [
+    "print",
+    "basico",
+    "salida"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Este ejercicio solo requiere usar la función print() para mostrar un mensaje en pantalla.",
+    "El formato exacto debe ser: 'Hola Mundo!' (con mayúsculas en H y M, y con signo de exclamación).",
+    "No necesitas leer entrada del usuario, solo imprimir el mensaje directamente.",
+    "La solución completa es una sola línea: print('Hola Mundo!')"
+  ]
+}

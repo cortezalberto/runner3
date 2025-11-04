@@ -1,0 +1,95 @@
+{
+  "tests": [
+    {
+      "name": "test_main_function_exists",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_conversion_ejemplo",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_conversion_cero",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_conversion_100",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_conversiones_varias",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_incluye_equivalen",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_completo",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_temperatura_decimal",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_varias_decimales",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_temperatura_negativa",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_temperatura_muy_negativa",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_varias_temperaturas_negativas",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_temperatura_muy_alta",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_temperatura_cero_absoluto_aproximado",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_precision_decimales",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_temperatura_corporal_normal",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_temperatura_fiebre",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_formula_precision",
+      "points": 2,
+      "visibility": "hidden"
+    }
+  ],
+  "max_points": 27
+}

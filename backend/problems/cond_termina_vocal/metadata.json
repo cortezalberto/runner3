@@ -1,0 +1,19 @@
+{
+  "title": "String termina en vocal",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-condicionales",
+  "difficulty": "medium",
+  "tags": [
+    "condicionales",
+    "strings",
+    "indexacion"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Los tests verifican que exista una función procesar_string(texto). El test_existe_funcion busca esta función específica que debe recibir un parámetro string.",
+    "⚠️ VOCALES MAYÚSCULAS Y MINÚSCULAS: Los tests verifican tanto 'casa' (minúscula) como 'Chile' (mayúscula con 'e'). Debes manejar ambos casos: a,e,i,o,u y A,E,I,O,U.",
+    "Accede al último carácter del string con texto[-1]. Los tests verifican: si termina en vocal → agrega '!', si NO termina en vocal → retorna sin cambios.",
+    "Los tests verifican casos exactos: 'casa' → 'casa!', 'papel' → 'papel' (sin cambios), 'Chile' → 'Chile!' (mayúscula). Usa el operador in con una tupla de vocales."
+  ]
+}

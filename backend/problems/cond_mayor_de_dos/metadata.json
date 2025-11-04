@@ -1,0 +1,18 @@
+{
+  "title": "Mayor de dos numeros",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-condicionales",
+  "difficulty": "easy",
+  "tags": [
+    "basico",
+    "practica"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Debes leer DOS números con input() (uno por línea) y convertirlos a float(). Los tests probarán con enteros, decimales y negativos.",
+    "Los tests verifican 3 casos: a > b (retorna a), b > a (retorna b), y a == b (retorna cualquiera). Usa if-elif-else o max(a, b).",
+    "Casos especiales que los tests verifican: números negativos (-5 vs -10, retorna -5), cero (0 vs -5, retorna 0), y decimales (3.5 vs 2.1).",
+    "El formato de salida acepta tanto '10' como '10.0', pero debe ser el NÚMERO mayor, sin texto adicional. Solo imprime el resultado de la comparación."
+  ]
+}

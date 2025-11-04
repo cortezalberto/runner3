@@ -1,0 +1,60 @@
+{
+  "tests": [
+    {
+      "name": "test_main_function_exists",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_saludos_nombres_comunes",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_diferentes_nombres",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_nombres_cortos",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_nombres_largos",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_comienza_con_hola",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_termina_con_exclamacion",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_contiene_nombre",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_nombres_compuestos",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_nombres_con_acento",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_espacio_despues_de_hola",
+      "points": 1,
+      "visibility": "hidden"
+    }
+  ],
+  "max_points": 15
+}

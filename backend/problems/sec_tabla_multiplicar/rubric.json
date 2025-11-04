@@ -1,0 +1,75 @@
+{
+  "tests": [
+    {
+      "name": "test_main_function_exists",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_tabla_del_5",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_tabla_del_3",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_linea_con_x",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_formato_linea_con_igual",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_multiplicadores_del_1_al_10",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_resultados_correctos",
+      "points": 2,
+      "visibility": "public"
+    },
+    {
+      "name": "test_diez_lineas_exactas",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_orden_secuencial",
+      "points": 1,
+      "visibility": "public"
+    },
+    {
+      "name": "test_tabla_numero_grande",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_tabla_numero_muy_grande",
+      "points": 1,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_tabla_del_cero",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_tabla_numero_negativo",
+      "points": 2,
+      "visibility": "hidden"
+    },
+    {
+      "name": "test_tabla_numeros_decimales",
+      "points": 2,
+      "visibility": "hidden"
+    }
+  ],
+  "max_points": 21
+}

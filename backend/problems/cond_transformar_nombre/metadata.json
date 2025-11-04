@@ -1,0 +1,19 @@
+{
+  "title": "Transformar nombre",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-condicionales",
+  "difficulty": "medium",
+  "tags": [
+    "condicionales",
+    "strings",
+    "metodos-string"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Los tests verifican que exista una función transformar_nombre(nombre, opcion). Debe recibir un string y un entero, y retornar el nombre transformado.",
+    "⚠️ OPCIONES VÁLIDAS: Los tests verifican 3 opciones: opcion=1 (mayúsculas con upper()), opcion=2 (minúsculas con lower()), opcion=3 (título con title()).",
+    "Los tests también verifican opción inválida (opcion=5) que debe retornar exactamente 'Opción inválida'. Usa if-elif-else para manejar las 3 opciones válidas y el else para inválidas.",
+    "Los tests verifican casos exactos: transformar_nombre('pedro', 1) → 'PEDRO', transformar_nombre('MARIA', 2) → 'maria', transformar_nombre('juan', 3) → 'Juan'."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Aprobado o Desaprobado",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-condicionales",
+  "difficulty": "easy",
+  "tags": [
+    "condicionales",
+    "if-else",
+    "evaluacion"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Los tests verificarán que tu función main() exista y lea la nota con input(). Recuerda convertir a float() para manejar decimales.",
+    "El límite crítico es 6.0: Los tests probarán notas como 5.99 (Desaprobado), 6.0 (Aprobado) y 6.01 (Aprobado). Usa el operador >= correctamente.",
+    "Los tests incluyen casos con decimales (6.5, 7.3, 5.9) y valores extremos (0, 10, 15). Tu condición debe manejar cualquier número decimal.",
+    "Los tests verifican el formato EXACTO de salida: 'Aprobado' o 'Desaprobado' (sin espacios extra, respeta mayúsculas). Usa print() sin modificar las cadenas."
+  ]
+}

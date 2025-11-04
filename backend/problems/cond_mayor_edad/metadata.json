@@ -1,0 +1,19 @@
+{
+  "title": "Mayor de edad",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-condicionales",
+  "difficulty": "easy",
+  "tags": [
+    "condicionales",
+    "if",
+    "basico"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "⚠️ CUIDADO: El enunciado dice 'MAYOR de 18' (> 18), NO 'mayor o igual'. Los tests verificarán que 18 sea 'Es menor de edad' y 19 sea 'Es mayor de edad'.",
+    "Los tests probarán el límite crítico: edad=17 (menor), edad=18 (menor), edad=19 (mayor). Usa el operador > estrictamente, NO >=.",
+    "Los tests incluyen rangos completos: 0-18 deben ser 'Es menor de edad', y 19-200 deben ser 'Es mayor de edad'. Verifica tu condición con if edad > 18.",
+    "Formato EXACTO de salida: 'Es mayor de edad' o 'Es menor de edad' (con 'Es' al inicio, respeta mayúsculas y espacios). Los tests fallan si cambias el formato."
+  ]
+}

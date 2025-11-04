@@ -1,0 +1,19 @@
+{
+  "title": "Saludo personalizado",
+  "subject_id": "programacion-1",
+  "unit_id": "estructuras-secuenciales",
+  "difficulty": "easy",
+  "tags": [
+    "strings",
+    "input",
+    "concatenacion"
+  ],
+  "timeout_sec": 3.0,
+  "memory_mb": 128,
+  "hints": [
+    "Lee el nombre del usuario usando input() y guárdalo en una variable.",
+    "Usa f-strings o concatenación para crear el mensaje de saludo con formato 'Hola {nombre}!'.",
+    "Recuerda usar print() para mostrar el saludo. El formato debe incluir coma y signo de exclamación.",
+    "La solución completa: nombre = input(), luego print(f'Hola {nombre}!')"
+  ]
+}

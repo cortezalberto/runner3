@@ -108,6 +108,29 @@ curl http://localhost:49000/api/result/JOB_ID | python -m json.tool
 
 **Python Playground Suite** - A production-ready code execution platform with Docker sandbox isolation, job queues, persistent storage, and a modern web interface. Students submit Python code that is executed in isolated Docker containers with strict security constraints.
 
+### Important: Obsolete Files Removed (Nov 4, 2025)
+
+The following files were removed as part of codebase cleanup. **DO NOT recreate them**:
+
+**Legacy MVP Files** (replaced by microservices architecture):
+- `app.py` (root) → Use `backend/app.py` instead
+- `runner.py` (root) → Use `worker/services/docker_runner.py` instead
+- `Dockerfile` (root) → Use `backend/Dockerfile` instead
+- `requirements.txt` (root) → Use service-specific files instead
+- `run_local.sh` → Use `docker compose` commands instead
+
+**Completed Migration Scripts** (moved to `scripts/archive/`):
+- `add_hints_to_problems.py` - Hints already added (124 total)
+- `deploy_conftest.py` - Conftest files already deployed
+- `crear_ejercicios_secuenciales.py` - Sequential exercises already created
+- `generar_ejercicios_restantes.py` - Task completed
+- `refactorizar_tests_secuenciales.py` - Refactoring completed
+
+**Temporary Files Removed**:
+- `test_runner.bat` - Obsolete test script
+- `test_submit.json` - Temporary test file
+- `.mypy_cache/` - Type checker cache (regenerated automatically)
+
 ## Architecture
 
 This is a microservices architecture with the following components:

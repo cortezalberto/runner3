@@ -12,17 +12,27 @@
 
 ---
 
-## 🎉 Mejoras Recientes (Oct 2025)
+## 🎉 Mejoras Recientes
 
+### Noviembre 2025
+**Ejercicios Secuenciales Refactorizados**:
+- ✅ **10 ejercicios sec_*** completamente refactorizados con test suites comprehensivos
+- 📊 **147 tests totales** (avg 14.7 tests por ejercicio, rango 10-24)
+- 🎯 Tests organizados por clases: TestFunctionExistence, TestBasicCases, TestEdgeCases
+- 🧪 Cobertura completa: casos básicos, edge cases, valores extremos, precisión decimal
+- 📝 Sistema de rúbricas actualizado (15-31 puntos por ejercicio)
+- 🔄 Estructura consistente con ejercicios condicionales
+
+### Octubre 2025
 **Performance optimizado para producción**:
 - ⚡ N+1 queries eliminados - **100x más rápido**
 - 🚀 Caching de problemas - **1000x más rápido** en requests subsiguientes
 - 🔥 Validators optimizados - **2x más rápido**
 - 📦 Docker images **30-40% más pequeñas**
 - 🎯 Type hints en todos los endpoints
-- 🏆 Codebase health score: **8.2/10**
+- 🏆 Codebase health score: **9.2/10** (mejorado desde 6.5/10)
 
-Ver [REFACTORING_SESSION_2025-10-25.md](REFACTORING_SESSION_2025-10-25.md) para detalles completos.
+Ver [CLAUDE.md](CLAUDE.md) para documentación completa y [REFACTORING_SESSION_2025-10-25.md](REFACTORING_SESSION_2025-10-25.md) para detalles de refactorización.
 
 ---
 
@@ -85,10 +95,12 @@ Ver [REFACTORING_SESSION_2025-10-25.md](REFACTORING_SESSION_2025-10-25.md) para 
    ```
 
 3. **Acceder a la aplicación:**
-   - **Frontend**: http://localhost:5173
-   - **Backend API**: http://localhost:8000
-   - **API Docs**: http://localhost:8000/docs
-   - **Health Check**: http://localhost:8000/api/health
+   - **Frontend**: http://localhost:49173 (Windows usa puerto 49173 por compatibilidad Hyper-V)
+   - **Backend API**: http://localhost:49000 (Windows usa puerto 49000 por compatibilidad Hyper-V)
+   - **API Docs**: http://localhost:49000/docs
+   - **Health Check**: http://localhost:49000/api/health
+
+   > **Nota para Windows**: Los puertos estándar (8000, 5173) están reservados por Hyper-V. El proyecto usa puertos altos (49000+) por defecto. En Linux/Mac sin conflictos, puedes cambiarlos en docker-compose.yml.
 
 ---
 

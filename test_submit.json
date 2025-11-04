@@ -1,5 +1,0 @@
-{
-  "problem_id": "sec_hola_mundo",
-  "code": "def main():\n    print('Hola, mundo!')\n\nif __name__ == '__main__':\n    main()",
-  "student_id": "test_refactor"
-}

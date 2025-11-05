@@ -2,9 +2,53 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ⚠️ CRITICAL: Docker Removed - Render.com Deployment Only (Nov 5, 2025)
+
+**BREAKING CHANGE**: Docker has been **completely removed** from the `Back/` directory for Render.com deployment.
+
+**What this means**:
+- ✅ **API REST completo funciona** (GET /api/problems, /api/subjects, /api/hierarchy, admin endpoints)
+- ❌ **Ejecución de código NO funciona** (POST /api/submit retorna status "unavailable")
+- ❌ **Docker sandbox eliminado** (Back/runner/, Dockerfiles, docker-compose.yml removed)
+
+**Archivos eliminados**:
+- `Back/docker-compose.yml`
+- `Back/backend/Dockerfile`
+- `Back/worker/Dockerfile`
+- `Back/runner/` (carpeta completa)
+- `Back/worker/services/docker_runner.py`
+
+**Alternativas para ejecución completa**:
+- Railway.com ($5/mes) - Soporta Docker ✅
+- Fly.io - Con Docker runtime ✅
+- VPS con Docker instalado ✅
+
+**Documentación completa**: Ver `Back/README.md` y `Back/SIN_DOCKER_CHANGELOG.md`
+
+---
+
+## ⚠️ Important: Project Structure (Updated Nov 5, 2025)
+
+**NEW STRUCTURE - Backend sin Docker, Frontend independiente:**
+
+- **Backend Location**: All backend code is now in the `Back/` directory
+  - `Back/backend/` - FastAPI application
+  - `Back/worker/` - RQ Worker (sin ejecución Docker, retorna "unavailable")
+  - ~~`Back/runner/`~~ - **ELIMINADO** (Docker no soportado en Render)
+  - Backend documentation: `Back/README.md`
+  - Deployment: `Back/RENDER_QUICKSTART.md`
+
+- **Frontend Location**: All frontend code is in the `Front/` directory
+  - Start frontend: `cd Front && npm run dev`
+  - Frontend documentation: `Front/README.md`
+
+**⚠️ IMPORTANT**: Docker ha sido ELIMINADO del proyecto para deployment en Render.com. Solo el API funciona, sin ejecución de código.
+
 ## Current Status
 
-**System**: Production-ready ✅ (Last updated: 4 Nov 2025)
+**System**: API-only (Render.com deployment) ⚠️ (Last updated: 5 Nov 2025)
+**Docker**: **ELIMINADO** - No code execution ❌
+**API Backend**: Fully functional ✅
 **Problem Count**: 31 problems across 8 subjects
 **Test Coverage**: 54+ tests per conditional problem, 10-24 tests per sequential problem ✅
 **Frontend**: TypeScript migration completed ✅ with dynamic logo system
@@ -13,7 +57,57 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Documentation**: Comprehensive with user stories and use cases
 **Code Quality**: Health Score 9.2/10 (improved from 6.5) ✅
 
-**Recent Improvements** (Nov 4, 2025):
+**Recent Improvements** (Nov 5, 2025):
+- **Docker Removal for Render.com** ⚠️:
+  - All Docker files and dependencies eliminated from `Back/` directory
+  - Worker adapted to return status "unavailable" instead of executing code
+  - Configuration simplified (no RUNNER_IMAGE, timeouts, memory limits)
+  - Documentation updated with clear limitations and alternatives
+  - Created `Back/README.md`, `Back/SIN_DOCKER_CHANGELOG.md` with complete details
+  - Render deployment ready with Procfile, runtime.txt, requirements.txt
+  - **Limitation**: POST /api/submit returns "unavailable", no code execution
+  - **Alternatives**: Railway.com, Fly.io, or VPS with Docker for full functionality
+
+**Previous Improvements** (Nov 4, 2025):
+- **Production Deployment Ready** ✅ (Nov 2025):
+  - Backend fully configured for Render.com deployment with Gunicorn
+  - Created comprehensive deployment documentation (RENDER_QUICKSTART.md, DEPLOY_RENDER.md)
+  - CORS configured for production Vercel frontend (https://front-eight-rho-61.vercel.app)
+  - Environment variables template (RENDER_ENV_VARS.txt) for easy setup
+  - Procfile, runtime.txt, and render.yaml configured
+  - Complete deployment guides with troubleshooting
+- **Frontend Code Quality** ✅ (Nov 2025):
+  - TypeScript type definitions: Created `vite-env.d.ts` for import.meta.env
+  - ESLint configuration: Comprehensive rules for TypeScript, React, and React Hooks
+  - Prettier integration: Consistent code formatting across all source files
+  - Fixed all TypeScript compilation errors (4 errors → 0 errors)
+  - All linting passes with 0 warnings
+  - Development scripts: `npm run lint`, `npm run format`, `npm run type-check`
+- **Security Hardening** ✅:
+  - Environment variables: No hardcoded credentials in docker-compose.yml
+  - Created `Back/.env` and `Back/.env.example` for secure configuration
+  - All sensitive data (DATABASE_URL, REDIS_URL, POSTGRES_PASSWORD) externalized
+  - Production-ready with clear security warnings in .env.example
+  - `.env` files properly excluded in .gitignore
+- **Backend-Frontend Separation** ✅:
+  - Backend and frontend are now completely independent applications
+  - Backend: FastAPI REST API on port 49000 with CORS configuration
+  - Frontend: React + TypeScript SPA with configurable API URL via .env
+  - Communication: Pure HTTP (no tight coupling)
+  - Both can be developed, tested, and deployed independently
+  - Created README_BACKEND.md and README_FRONTEND.md with standalone instructions
+  - **GitHub Separation Ready**: Complete separation guide and tools created
+    - GITHUB_SEPARATION_GUIDE.md: Step-by-step instructions for creating separate repos
+    - SEPARATION_SUMMARY.md: Executive summary of separation strategy
+    - Independent .gitignore files for backend and frontend
+    - docker-compose.backend-only.yml for standalone backend deployment
+    - start-backend-only.bat/.sh scripts for quick backend startup
+  - Project can now be uploaded to GitHub as two independent repositories
+- **Common Module Architecture** ✅:
+  - Created `Back/common/` module to eliminate code duplication
+  - Shared code between backend and worker (config, database, models, logging)
+  - Reduced worker dependencies and image size significantly
+  - Cleaner separation of concerns and easier maintenance
 - **Sequential Exercises Refactoring**:
   - All 10 sequential exercises (sec_*) fully refactored with comprehensive test suites
   - Tests per problem: 10-24 tests (avg 14.7 tests, total 147 tests across 10 exercises)
@@ -60,62 +154,353 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Architecture: Service layer (100%), Pydantic v2 schemas, structured logging
 - Documentation: Created HISTORIAS_USUARIO.md with 21 user stories and detailed use cases
 
-See [REFACTORING_SESSION_2025-10-25.md](REFACTORING_SESSION_2025-10-25.md) for complete refactoring details, [REFACTORIZACION_APLICADA.md](REFACTORIZACION_APLICADA.md), [REFACTORIZACION_TYPESCRIPT.md](REFACTORIZACION_TYPESCRIPT.md), and [HISTORIAS_USUARIO.md](HISTORIAS_USUARIO.md) for detailed changes and use cases.
+See [HISTORIAS_USUARIO.md](HISTORIAS_USUARIO.md) for user stories and use cases. Historical refactoring documentation is available in [docs/archive/](docs/archive/).
+
+## Project Structure (Clean and Organized)
+
+**IMPORTANT**: The project has been cleaned and organized into two independent directories.
+
+### Current Structure
+
+The codebase is now cleanly separated into two main directories:
+
+1. **Back/** - Complete backend application (FastAPI, Worker, Runner, PostgreSQL, Redis)
+2. **Front/** - Complete frontend application (React + TypeScript + Vite)
+
+### Directory Organization
+
+**Root directory contains:**
+- `Back/` - Backend services (completely self-contained)
+- `Front/` - Frontend application (completely self-contained)
+- `docs/` - Project documentation
+- `scripts/` - Utility scripts
+- Configuration files: `.gitignore`, `docker-compose.yml`, `pyproject.toml`
+- Documentation: `CLAUDE.md`, `README.md`, `TESTING.md`, `HINT_SYSTEM.md`, etc.
+
+**Obsolete directories removed:**
+- ~~`backend/`~~ → Use `Back/backend/`
+- ~~`worker/`~~ → Use `Back/worker/`
+- ~~`runner/`~~ → Use `Back/runner/`
+- ~~`frontend/`~~ → Use `Front/`
+- All temporary cleanup files and separation documentation removed
+
+### Two Repository Strategy
+
+**Backend Repository** (`python-playground-backend`):
+- Contains: backend/, worker/, runner/, scripts/, docker-compose.yml
+- Technology: Python, FastAPI, Docker, PostgreSQL, Redis
+- Port: 49000 (exposes REST API)
+- Documentation: README_BACKEND.md → README.md
+
+**Frontend Repository** (`python-playground-frontend`):
+- Contains: Front/ (src/, public/, package.json, vite.config.ts)
+- Technology: React, TypeScript, Vite, Monaco Editor
+- Port: 5173 (connects to backend via VITE_API_URL)
+- Documentation: README_FRONTEND.md → README.md
+
+### Communication
+
+- **Development**: Frontend connects to `http://localhost:49000` via `.env` file
+- **Production**: Frontend built with `VITE_API_URL=https://api.your-domain.com`
+- **Protocol**: Pure HTTP REST API (no coupling)
+- **CORS**: Backend configured with `CORS_ALLOW_ALL=true` for development
+
+### Quick Separation Steps
+
+```bash
+# See GITHUB_SEPARATION_GUIDE.md for complete instructions
+
+# Backend
+cp -r backend/ worker/ runner/ ../python-playground-backend/
+cp docker-compose.backend-only.yml ../python-playground-backend/docker-compose.yml
+cp .gitignore.backend ../python-playground-backend/.gitignore
+cp README_BACKEND.md ../python-playground-backend/README.md
+
+# Frontend
+cp -r Front/* ../python-playground-frontend/
+cp Front/.gitignore ../python-playground-frontend/.gitignore
+cp Front/README.md ../python-playground-frontend/README.md
+```
+
+For detailed instructions, see **GITHUB_SEPARATION_GUIDE.md**.
+
+---
 
 ## Quick Reference
 
-**Most Common Commands:**
+**⚠️ CRITICAL: Docker NO disponible en Back/**
+
+El directorio `Back/` ha sido adaptado para **Render.com** (sin Docker). Para desarrollo local con Docker, usa el root `docker-compose.yml` (si existe) o considera Railway.com/Fly.io para ejecución completa.
+
+**Most Common Commands (Render.com - Sin Docker):**
 ```bash
-# Start everything (first time)
-docker build -t py-playground-runner:latest ./runner && docker compose up --build
+# Setup local (sin Docker)
+cd Back
+cp .env.example .env
+# Edit .env with your PostgreSQL and Redis URLs
 
-# Start everything (subsequent runs)
-docker compose up -d
+# Instalar dependencias
+pip install -r requirements.txt
 
-# Check service status
-docker compose ps
+# Ejecutar backend localmente
+cd backend
+uvicorn app:app --reload --host 0.0.0.0 --port 8000
 
-# View logs
-docker compose logs -f backend
-docker compose logs -f worker
+# Ejecutar worker localmente (otra terminal)
+cd worker
+python -m rq.cli worker submissions --url redis://localhost:6379/0
 
-# Stop everything
-docker compose down
-
-# Reset database
-docker compose down -v && docker compose up --build
-
-# Verify system health
-curl http://localhost:49000/api/health | python -m json.tool
-
-# Test a specific problem (submit from file to avoid JSON escaping issues)
-# Create test_submit.json with your code, then:
-curl -X POST http://localhost:49000/api/submit -H "Content-Type: application/json" -d @test_submit.json
-
-# Check results (replace JOB_ID with actual job_id from submit response)
-curl http://localhost:49000/api/result/JOB_ID | python -m json.tool
+# Frontend (independiente)
+cd Front
+npm install
+npm run dev
 ```
 
-**Access Points:**
-- Frontend: http://localhost:49173 (Windows: port 49173 due to Hyper-V conflicts)
-- Backend API: http://localhost:49000 (Windows: port 49000 due to Hyper-V conflicts)
-- API Docs: http://localhost:49000/docs
-- Health Check: http://localhost:49000/api/health
+**Deployment a Render.com:**
+```bash
+# Ver guías de deployment
+cat Back/RENDER_QUICKSTART.md
+cat Back/RENDER_TROUBLESHOOTING.md
 
-**Note**: On Windows, default ports 8000 and 5173 may conflict with Hyper-V reserved ports. The project is configured to use high ports (49000+) by default. If running on Linux/Mac without port conflicts, you can change these back in docker-compose.yml.
+# Variables de entorno necesarias
+cat Back/RENDER_ENV_VARS.txt
+```
+
+**Testing (sin Docker):**
+```bash
+# Verificar importaciones
+cd Back
+python -c "from backend import config; from worker import tasks; print('OK')"
+
+# Verificar FastAPI app
+python -c "from backend.app import app; print(f'Routes: {len(app.routes)}')"
+```
+
+**Access Points (si hay PostgreSQL y Redis locales):**
+- Backend API: http://localhost:8000
+- API Docs: http://localhost:8000/docs
+- Health Check: http://localhost:8000/api/health
+- Frontend: http://localhost:5173 (si corriendo con npm run dev)
+
+**⚠️ IMPORTANTE**:
+- POST /api/submit retornará status "unavailable" (no hay Docker para ejecutar código)
+- Solo endpoints GET funcionan completamente (problemas, subjects, hierarchy, admin)
+- Para ejecución de código completa: Railway.com, Fly.io, o VPS con Docker
+
+---
+
+## 🔧 Troubleshooting Render Deployment
+
+### Error Más Común: ModuleNotFoundError
+
+**Error**: `ModuleNotFoundError: No module named 'backend'`
+
+**Causa**: Gunicorn ejecuta desde directorio incorrecto en Render.
+
+**Solución Rápida**:
+
+En Render Dashboard → Web Service → Settings:
+
+1. **Root Directory**: Déjalo **VACÍO** (blank)
+2. **Build Command**:
+   ```bash
+   cd Back && pip install -r requirements.txt
+   ```
+3. **Start Command**:
+   ```bash
+   cd Back && gunicorn backend.app:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --log-level info
+   ```
+
+**❌ NO HAGAS ESTO**:
+- NO pongas `Root Directory: Back` (causa problemas con `cd Back`)
+- NO uses `$PWD` (apunta al root del proyecto, no a Back/)
+
+**Documentación completa**: Ver `Back/RENDER_FIX_IMPORT_ERROR.md`
+
+### Verificación Post-Deployment
+
+```bash
+# Health check
+curl https://tu-backend.onrender.com/api/health
+
+# Expected response:
+{
+  "service": "api",
+  "status": "healthy",
+  "database": "healthy",
+  "redis": "healthy"
+}
+```
+
+### Variables de Entorno Requeridas
+
+```env
+DATABASE_URL=postgresql://user:pass@hostname.render.com/db
+REDIS_URL=redis://default:pass@hostname.upstash.io:6379
+CORS_ORIGINS=https://front-eight-rho-61.vercel.app
+CORS_ALLOW_ALL_ORIGINS=false
+```
+
+**Opcional** (solo si `cd Back` no funciona):
+```env
+PYTHONPATH=/opt/render/project/src/Back
+```
+
+---
+
+## Backend-Frontend Separation
+
+**UPDATED (Nov 5, 2025)**: Backend sin Docker (Render.com), Frontend independiente.
+
+### How to Use
+
+1. **Backend Only** (API-only, sin ejecución de código):
+   ```bash
+   cd Back
+   cp .env.example .env
+   # Edit .env with PostgreSQL and Redis URLs
+   pip install -r requirements.txt
+
+   # Start backend
+   cd backend
+   uvicorn app:app --reload --host 0.0.0.0 --port 8000
+
+   # Start worker (otra terminal)
+   cd worker
+   python -m rq.cli worker submissions --url redis://localhost:6379/0
+   ```
+
+2. **Frontend Only** (for UI development):
+   ```bash
+   cd Front
+   npm install  # First time only
+   echo "VITE_API_URL=http://localhost:8000" > .env  # If .env doesn't exist
+   npm run dev
+   # Open http://localhost:5173
+   ```
+
+3. **Deployment a Render.com** (Producción):
+   ```bash
+   # Ver guías completas
+   cat Back/RENDER_QUICKSTART.md
+   cat Back/RENDER_TROUBLESHOOTING.md
+
+   # Configurar en Render Dashboard:
+   # - Web Service: gunicorn backend.app:app
+   # - Background Worker: python -m rq.cli worker submissions
+   # - Variables: DATABASE_URL, REDIS_URL (Upstash), CORS_ORIGINS
+   ```
+
+### Quick Validation (Verify Everything Works)
+
+After starting services locally (sin Docker), run these checks:
+
+```bash
+# 1. Backend health check (si PostgreSQL y Redis están corriendo)
+curl http://localhost:8000/api/health | python -m json.tool
+# Expected: "status": "healthy" (o error si no hay DB/Redis)
+
+# 2. List problems (no requiere DB/Redis)
+curl http://localhost:8000/api/problems | python -m json.tool | head -30
+# Should return: lista de 31 problemas
+
+# 3. Test code submission (retornará "unavailable")
+curl -X POST http://localhost:8000/api/submit \
+  -H "Content-Type: application/json" \
+  -d '{"problem_id":"sec_hola_mundo","code":"def main():\n    print(\"test\")","student_id":"test"}' \
+  | python -m json.tool
+# Expected: job_id con status "queued" → luego status "unavailable"
+
+# 4. Check configuration
+cd Back
+python -c "from backend.config import settings; print(f'CORS_ORIGINS: {settings.CORS_ORIGINS}')"
+# Should show: lista de origins permitidos
+
+# 5. Verify worker function exists
+python -c "from worker.tasks import run_submission_in_sandbox; print('Worker OK')"
+# Should show: Worker OK
+```
+
+### Configuration Files
+
+**IMPORTANT - Environment Variables** (Nov 5, 2025 - Render.com Deployment):
+Configuración simplificada sin Docker:
+
+- **`Back/.env`** - Local development (PostgreSQL/Redis en localhost)
+  - DATABASE_URL, REDIS_URL para desarrollo local
+  - CORS_ORIGINS con localhost y Vercel
+  - CORS_ALLOW_ALL_ORIGINS=true (desarrollo)
+  - ⚠️ Sin variables Docker (RUNNER_IMAGE, WORKSPACE_DIR eliminadas)
+
+- **`Back/.env.example`** - Template para Render.com
+  - DATABASE_URL con formato Render PostgreSQL
+  - REDIS_URL con formato Upstash
+  - CORS_ORIGINS para producción (Vercel)
+  - Advertencias sobre limitación Docker
+
+- **`Back/backend/config.py`** - Configuración centralizada
+  - Variables simplificadas (sin Docker)
+  - REDIS_URL completa (no REDIS_HOST/PORT)
+  - CORS_ALLOW_ALL_ORIGINS agregada
+  - Eliminadas: RUNNER_IMAGE, DEFAULT_TIMEOUT_SEC, DEFAULT_MEMORY_MB, DEFAULT_CPUS
+
+- **`Back/Procfile`** - Render start commands
+  - web: `cd $PWD && gunicorn backend.app:app ...`
+  - worker: `cd $PWD && python -m rq.cli worker submissions --url $REDIS_URL`
+
+- **`Back/runtime.txt`** - Python 3.11.9 para Render
+
+- **Frontend API URL**: `Front/.env` - Set `VITE_API_URL=http://localhost:8000` (local) o URL de Render
+
+### Detailed Documentation
+
+- **Backend Render Deployment**: See [Back/README.md](Back/README.md) - Documentación completa sin Docker
+- **Render Quick Start**: See [Back/RENDER_QUICKSTART.md](Back/RENDER_QUICKSTART.md) - Guía rápida deployment
+- **Render Troubleshooting**: See [Back/RENDER_TROUBLESHOOTING.md](Back/RENDER_TROUBLESHOOTING.md) - Errores comunes
+- **Docker Removal Changelog**: See [Back/SIN_DOCKER_CHANGELOG.md](Back/SIN_DOCKER_CHANGELOG.md) - Registro de cambios
+- **Frontend**: See [Front/README.md](Front/README.md) for frontend development
 
 ## Project Overview
 
-**Python Playground Suite** - A production-ready code execution platform with Docker sandbox isolation, job queues, persistent storage, and a modern web interface. Students submit Python code that is executed in isolated Docker containers with strict security constraints.
+**Python Playground Suite** - API REST para plataforma de ejercicios de programación (Render.com deployment - sin Docker).
 
-### Important: Obsolete Files Removed (Nov 4, 2025)
+**⚠️ CRITICAL LIMITATION**: Docker ha sido **eliminado** para Render.com deployment:
+- ✅ **API REST funcional** - Ver problemas, jerarquía, subjects, admin endpoints
+- ❌ **Ejecución de código NO disponible** - POST /api/submit retorna "unavailable"
+- ❌ **Sandbox Docker eliminado** - Sin aislamiento para ejecutar código de estudiantes
 
-The following files were removed as part of codebase cleanup. **DO NOT recreate them**:
+**IMPORTANT**: Backend and frontend are **completely independent** applications:
+- **Backend**: FastAPI REST API standalone (API-only, sin ejecución código)
+- **Frontend**: React + TypeScript SPA que conecta via HTTP
+- **Deployment**: Backend en Render.com, Frontend en Vercel
+- **Para ejecución completa**: Railway.com ($5/mes), Fly.io, o VPS con Docker
+
+### Important: Directory Structure Changes (Nov 4, 2025)
+
+**NEW LOCATION - Backend moved to Back/ directory:**
+
+The entire backend has been reorganized into the `Back/` directory for complete autonomy:
+
+**Current Structure (USE THESE):**
+- `Back/backend/` - FastAPI application (moved from root `backend/`)
+- `Back/worker/` - RQ Worker (moved from root `worker/`)
+- `Back/runner/` - Docker sandbox (moved from root `runner/`)
+- `Back/workspaces/` - Execution workspaces (moved from root `workspaces/`)
+- `Back/docker-compose.yml` - Backend standalone compose
+- `Back/start.bat` / `Back/start.sh` - Backend startup scripts
+- `Front/` - Frontend application (moved from `frontend/`)
+
+**Obsolete Directories (DO NOT USE - Keep for reference only):**
+- `backend/` (root) → Use `Back/backend/` instead
+- `worker/` (root) → Use `Back/worker/` instead
+- `runner/` (root) → Use `Back/runner/` instead
+- `workspaces/` (root) → Use `Back/workspaces/` instead
+- `frontend/` (root) → Use `Front/` instead
 
 **Legacy MVP Files** (replaced by microservices architecture):
-- `app.py` (root) → Use `backend/app.py` instead
-- `runner.py` (root) → Use `worker/services/docker_runner.py` instead
-- `Dockerfile` (root) → Use `backend/Dockerfile` instead
+- `app.py` (root) → Use `Back/backend/app.py` instead
+- `runner.py` (root) → Use `Back/worker/services/docker_runner.py` instead
+- `Dockerfile` (root) → Use `Back/backend/Dockerfile` instead
 - `requirements.txt` (root) → Use service-specific files instead
 - `run_local.sh` → Use `docker compose` commands instead
 
@@ -126,62 +511,98 @@ The following files were removed as part of codebase cleanup. **DO NOT recreate 
 - `generar_ejercicios_restantes.py` - Task completed
 - `refactorizar_tests_secuenciales.py` - Refactoring completed
 
-**Temporary Files Removed**:
-- `test_runner.bat` - Obsolete test script
-- `test_submit.json` - Temporary test file
+**Temporary/Generated Files** (ignored by git):
 - `.mypy_cache/` - Type checker cache (regenerated automatically)
+- `Back/workspaces/` - Temporary execution sandboxes (generated by worker)
+- `Front/node_modules/` - Frontend dependencies (regenerated by npm install)
 
 ## Architecture
 
-This is a microservices architecture with the following components:
+**⚠️ UPDATED (Nov 5, 2025): Sin Docker - Render.com Deployment**
+
+**API-Only Architecture (Docker Eliminado):**
 
 ```
-Frontend (React+TypeScript+Monaco) → Backend (FastAPI) → Redis (RQ Queue) → Worker → Docker Sandbox
-                                            ↓
-                                      PostgreSQL
+Frontend (Vercel)  ─HTTP─>  Backend (Render.com)  ─>  Redis Queue (Upstash)  ─>  Worker
+   [React+TS]              [FastAPI + Gunicorn]                                   ↓
+                                   ↓                                    (Returns "unavailable")
+                           PostgreSQL (Render)
 ```
+
+**⚠️ Docker Sandbox Eliminado**: Worker NO ejecuta código, retorna status "unavailable"
+
+### Key Independence Points
+
+1. **Backend is a standalone REST API** (API-only):
+   - Runs on Render.com (port 8000 interno, expuesto via URL Render)
+   - Accepts HTTP requests from any client
+   - CORS configured for Vercel frontend
+   - ✅ GET endpoints funcionan (problemas, subjects, hierarchy, admin)
+   - ❌ POST /api/submit retorna "unavailable" (sin Docker)
+
+2. **Frontend is a standalone SPA**:
+   - Deployed to Vercel (static hosting)
+   - Connects to backend via `VITE_API_URL` environment variable
+   - Can run locally with `npm run dev`
+   - API calls use fetch/axios to Render backend
+
+3. **Communication**: HTTP only (no tight coupling)
+
+4. **Limitation**: Sin ejecución de código (Docker no disponible en Render)
 
 ### Core Services
 
-1. **backend/** - FastAPI REST API with service layer architecture
+1. **Back/common/** - Shared module between backend and worker (NEW Nov 2025)
+   - **config.py** - Centralized configuration with environment variables
+   - **database.py** - SQLAlchemy session management
+   - **models.py** - Database models (Submission, TestResult)
+   - **logging_config.py** - Structured JSON logging
+   - Eliminates code duplication between backend and worker
+   - Reduces Docker image size and maintenance burden
+
+2. **Back/backend/** - FastAPI REST API with service layer architecture
    - **app.py** - Routes/endpoints
    - **services/** - Business logic (ProblemService, SubmissionService, SubjectService)
-   - **models.py** - SQLAlchemy ORM (Submission, TestResult)
-   - **config.py** - Centralized configuration
    - **validators.py** - Input validation and security checks
    - **exceptions.py** - Custom exception hierarchy
-   - **logging_config.py** - Structured JSON logging
+   - **schemas.py** - Pydantic v2 models for request/response validation
+   - **problems/** - 31 coding problems organized by subject/unit
 
-2. **worker/** - RQ worker with service layer architecture
-   - **tasks.py** - Job orchestration
-   - **services/docker_runner.py** - Docker execution with path translation
-   - **services/rubric_scorer.py** - Automatic grading
+3. **Back/worker/** - RQ worker adaptado (sin Docker)
+   - **tasks.py** - Job orchestration (retorna "unavailable")
+   - ~~**services/docker_runner.py**~~ - **ELIMINADO** (Docker no soportado)
+   - ~~**services/rubric_scorer.py**~~ - **ELIMINADO** (sin ejecución, sin scoring)
 
-3. **runner/** - Minimal Docker image for sandboxed execution
-   - Python 3.11 + pytest, non-root user (uid 1000)
+4. ~~**Back/runner/**~~ - **ELIMINADO** (Docker sandbox removido completamente)
 
-4. **frontend/** - React + TypeScript + Vite + Monaco Editor
+5. **Front/** - React + TypeScript + Vite + Monaco Editor
+   - Located in `Front/` directory (moved from `frontend/` on Nov 4, 2025)
    - Hierarchical problem selector (Subject → Unit → Problem)
    - Real-time result polling with AbortController
    - Full type safety with TypeScript interfaces for all API responses
+   - Anti-cheating system (anti-paste + tab monitoring)
+   - Progressive hint system (4 levels)
 
-5. **PostgreSQL** - Submissions and TestResults tables
+6. **PostgreSQL** - Submissions and TestResults tables (port 5433)
 
-6. **Redis** - Job queue (RQ)
+7. **Redis** - Job queue (RQ) for asynchronous task processing
 
-### Execution Flow
+### Execution Flow (Render.com - Sin Docker)
+
+**⚠️ LIMITADO**: Sin ejecución de código, solo API de lectura funciona completamente.
 
 ```
 1. Student submits code → Backend creates Submission (status: "pending")
 2. Backend enqueues job in Redis → status: "queued"
 3. Worker picks up job from queue
-4. Worker creates temp workspace with student_code.py, tests_public.py, tests_hidden.py, conftest.py
-5. Worker runs: docker run --network none --read-only --cpus 1 --memory 256m ...
-6. Container executes pytest → generates report.json
-7. Worker parses report, applies rubric scoring
-8. Worker saves TestResult rows + updates Submission (status: "completed")
-9. Frontend polls /api/result/{job_id} every 1s and displays results
+4. ⚠️ Worker NO ejecuta Docker (no disponible en Render)
+5. Worker marca Submission como status: "unavailable"
+6. Worker crea TestResult con mensaje explicativo
+7. Worker guarda en DB: error_message = "Ejecución de código NO disponible en Render"
+8. Frontend polls /api/result/{job_id} y muestra mensaje de limitación
 ```
+
+**Flujo completo requiere**: Railway.com, Fly.io, o VPS con Docker instalado.
 
 ### Database Models
 
@@ -196,39 +617,62 @@ Frontend (React+TypeScript+Monaco) → Backend (FastAPI) → Redis (RQ Queue) �
 
 ## Critical Architecture Decisions
 
-### Docker-in-Docker Path Translation
+### ⚠️ Docker-in-Docker Path Translation (MOST COMMON ISSUE)
 
-The worker spawns Docker containers using the host's Docker daemon. This creates a path mismatch:
+**The Problem**: Worker spawns Docker containers using the host's Docker daemon, creating a path mismatch:
 - Worker creates files in `/workspaces/sandbox-xxx` (inside worker container)
 - Docker daemon looks for paths on **host filesystem**, not worker filesystem
+- Result: "file not found" errors when mounting volumes
 
-**Solution**:
-1. `./workspaces` bind-mounted to both host and worker (see docker-compose.yml)
+**The Solution** (see worker/tasks.py:140-141):
+1. `./workspaces` bind-mounted to both host and worker (see docker-compose.yml:79)
 2. Worker translates paths: `/workspaces/sandbox-xxx` → `${PWD}/workspaces/sandbox-xxx`
 3. Files get chmod 666, directories get chmod 777 (runner uses uid 1000, worker creates as root)
 
-Without this: "file not found" errors. See worker/tasks.py:140-141.
+**When this breaks**: If you change workspace locations or mount paths without updating HOST_WORKSPACE_DIR env var.
 
-### Dockerfile Build Context
+### ⚠️ Dockerfile Build Context (SECOND MOST COMMON ISSUE)
 
-All Dockerfiles use root (`.`) as context in docker-compose.yml. COPY paths must be `backend/file`, not `./file`.
+All Dockerfiles use root (`.`) as build context in docker-compose.yml. COPY paths must be relative to project root.
 
 ```dockerfile
-# ✅ CORRECT (context is root)
+# ✅ CORRECT (context is root of project)
 COPY backend/requirements.txt ./backend/
 RUN pip install -r backend/requirements.txt
 
-# ❌ WRONG (context is root)
+# ❌ WRONG (will cause ModuleNotFoundError)
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
 ```
 
-Wrong context → ModuleNotFoundError. See docker-compose.yml build contexts.
+**When this breaks**: Adding new services or modifying Dockerfiles without checking build context in docker-compose.yml.
 
 ## Development Commands
 
 ### Quick Start
 
+**Option 1: Run Backend Only (API standalone)**
+```bash
+# ⚠️ REQUIRED FIRST - Build runner image
+docker build -t py-playground-runner:latest ./Back/runner
+
+# Start backend services (without frontend)
+docker compose up -d postgres redis backend worker
+
+# Verify API is running
+curl http://localhost:49000/api/health | python -m json.tool
+```
+
+**Option 2: Run Frontend Only (separate from Docker)**
+```bash
+cd Front
+npm install
+echo "VITE_API_URL=http://localhost:49000" > .env
+npm run dev
+# Open http://localhost:5173
+```
+
+**Option 3: Run Everything with Docker**
 ```bash
 # Windows
 start.bat
@@ -241,8 +685,8 @@ chmod +x start.sh
 ### Docker Compose
 
 ```bash
-# Build runner image (one-time)
-docker build -t py-playground-runner:latest ./runner
+# ⚠️ CRITICAL FIRST STEP - Build runner image (one-time, but required)
+docker build -t py-playground-runner:latest ./Back/runner
 
 # Start all services
 docker compose up --build
@@ -251,73 +695,74 @@ docker compose up --build
 docker compose ps  # All should show "Up" or "Up (healthy)"
 
 # Health check
-curl http://localhost:8000/api/health
+curl http://localhost:49000/api/health | python -m json.tool
 ```
 
-### Local Development
+### Local Development (without Docker)
 
 **Backend:**
 ```bash
-cd backend
+cd Back/backend
 pip install -r requirements.txt
-export DATABASE_URL=postgresql://playground:playground@localhost:5432/playground  # Linux/Mac
-set DATABASE_URL=postgresql://playground:playground@localhost:5432/playground    # Windows
-uvicorn backend.app:app --reload
+export DATABASE_URL=postgresql://playground:playground@localhost:5433/playground  # Linux/Mac (note port 5433)
+set DATABASE_URL=postgresql://playground:playground@localhost:5433/playground    # Windows
+uvicorn backend.app:app --reload --host 0.0.0.0 --port 8000
 ```
 
 **Worker:**
 ```bash
-cd worker
+cd Back/worker
 pip install -r requirements.txt
-export DATABASE_URL=postgresql://playground:playground@localhost:5432/playground  # Linux/Mac
+export DATABASE_URL=postgresql://playground:playground@localhost:5433/playground  # Linux/Mac
 rq worker --url redis://localhost:6379 submissions
 ```
 
-**Frontend:**
+**Frontend (Independent):**
 ```bash
-cd frontend
+cd Front
 npm install
-npm run dev
 
-# TypeScript type checking (optional)
-npx tsc --noEmit
+# Configure backend URL
+echo "VITE_API_URL=http://localhost:49000" > .env
+
+# Start dev server
+npm run dev
+# Open http://localhost:5173
+
+# Development workflow
+npm run type-check     # TypeScript type checking (npx tsc --noEmit)
+npm run lint           # ESLint checking
+npm run lint:fix       # Auto-fix ESLint issues
+npm run format         # Format code with Prettier
+npm run format:check   # Check if code is formatted
 ```
 
-### Testing and Code Quality
+**IMPORTANT**: Frontend connects to backend via environment variable. The backend must be running and have CORS enabled:
+```bash
+# In backend: docker-compose.yml or .env
+CORS_ALLOW_ALL=true  # Development only
+# Or specify origins:
+# CORS_ORIGINS=http://localhost:5173,http://localhost:49173
+```
 
-**Run Tests:**
+### Testing
+
 ```bash
 # Backend tests
-docker compose exec backend pytest backend/tests/ -v
+docker compose exec backend pytest Back/backend/tests/ -v
 
 # With coverage
-docker compose exec backend pytest backend/tests/ --cov=backend --cov-report=term-missing
+docker compose exec backend pytest Back/backend/tests/ --cov=backend --cov-report=term-missing
 
-# Specific test
-docker compose exec backend pytest backend/tests/test_problem_service.py::TestProblemService::test_list_all_problems -v
-
-# Worker tests
+# Worker tests (install pytest first)
 docker compose exec worker pip install pytest pytest-mock
-docker compose exec worker pytest worker/tests/ -v
+docker compose exec worker pytest Back/worker/tests/ -v
+
+# Frontend type checking
+cd Front && npx tsc --noEmit
 ```
 
-**Run Linters:**
-```bash
-# Install dev dependencies
-pip install -r backend/requirements-dev.txt
-
-# Format and lint
-black backend/ worker/
-isort backend/ worker/
-flake8 backend/ worker/
-mypy backend/ worker/
-
-# Pre-commit hooks
-pre-commit install
-pre-commit run --all-files
-```
-
-See [TESTING.md](TESTING.md) for detailed documentation.
+See [TESTING.md](TESTING.md) for detailed documentation including linting and pre-commit hooks.
 
 ### Database Access
 
@@ -350,7 +795,7 @@ The platform organizes problems using a **three-level hierarchy**: Subject → U
 
 ### Configuration
 
-Subjects and units are defined in [backend/subjects_config.json](backend/subjects_config.json). Edit this file to add new subjects/units - no code changes needed.
+Subjects and units are defined in [Back/backend/subjects_config.json](Back/backend/subjects_config.json). Edit this file to add new subjects/units - no code changes needed.
 
 **Current subjects (8 total):**
 1. **Programación 1** (Python) - Estructuras Secuenciales, Condicionales, Repetitivas, Listas, Funciones
@@ -379,7 +824,7 @@ Subjects and units are defined in [backend/subjects_config.json](backend/subject
 - GET /api/admin/summary - Aggregate statistics
 - GET /api/admin/submissions - Recent submissions with filters
 
-Full schemas: http://localhost:8000/docs
+Full schemas: http://localhost:49000/docs
 
 ### Frontend Navigation
 
@@ -388,13 +833,13 @@ Three cascading dropdowns:
 2. **📖 Unidad Temática** (Unit) - Auto-populates from selected subject
 3. **🎯 Ejercicio** (Problem) - Shows problems for selected unit
 
-See [frontend/src/components/Playground.tsx](frontend/src/components/Playground.tsx)
+See [Front/src/components/Playground.tsx](Front/src/components/Playground.tsx)
 
 ### Dynamic Logo System
 
 The frontend displays technology logos that change based on the selected subject. Logos are SVG-based and use official colors.
 
-**Implementation**: [frontend/src/components/LanguageLogo.tsx](frontend/src/components/LanguageLogo.tsx)
+**Implementation**: [Front/src/components/LanguageLogo.tsx](Front/src/components/LanguageLogo.tsx)
 
 **Logo Configuration**:
 - **Single logo subjects**: programacion-1 (Python), programacion-2 (Java), programacion-3 (Spring Boot), programacion-4 (FastAPI), algoritmos (PSeInt)
@@ -404,7 +849,7 @@ The frontend displays technology logos that change based on the selected subject
   - **Backend**: 2 logos (Python, FastAPI) displayed side-by-side
 
 **Adding New Subject Logos**:
-1. Edit `frontend/src/components/LanguageLogo.tsx`
+1. Edit `Front/src/components/LanguageLogo.tsx`
 2. Add new `case 'subject-id':` in the switch statement
 3. For multi-logo subjects, use flex layout: `<div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>`
 4. Use unique gradient IDs to avoid SVG conflicts (e.g., `pyYellowBackend`, `fastapiBackendGradient`)
@@ -412,7 +857,7 @@ The frontend displays technology logos that change based on the selected subject
 
 ## Problem Structure
 
-Problems live in `backend/problems/<problem_id>/` with 6 required files:
+Problems live in `Back/backend/problems/<problem_id>/` with 6 required files:
 
 - `prompt.md` - Problem statement (Markdown)
 - `starter.py` - Initial code template
@@ -510,7 +955,7 @@ def test_ejemplo():
 - Simulates real-world input/output programs
 - Students learn standard Python entry point convention
 
-See `backend/problems/cond_aprobado/` for complete examples.
+See `Back/backend/problems/cond_aprobado/` for complete examples.
 
 ## Progressive Hint System
 
@@ -795,7 +1240,7 @@ Each test has explicit point values in `rubric.json`:
 
 ### Shared Test Fixtures (conftest.py)
 
-**Location**: Deployed to all conditional problem directories (e.g., `backend/problems/cond_aprobado/conftest.py`)
+**Location**: Deployed to all conditional problem directories (e.g., `Back/backend/problems/cond_aprobado/conftest.py`)
 
 **Important**: Worker dynamically generates conftest.py by merging fixtures with report generation code (see `worker/tasks.py:136-218`).
 
@@ -892,7 +1337,7 @@ def test_notas(self, capture_main_output, student_module, input_val, expected):
 | Boundary coverage | ~35% | ~95% | ↑171% |
 | Quality score | 6.5/10 | 9.2/10 | ↑41% |
 
-**Documentation**: See [TEST_IMPROVEMENTS_REPORT.md](TEST_IMPROVEMENTS_REPORT.md) and [ANTES_DESPUES_TESTS.md](ANTES_DESPUES_TESTS.md) for complete details.
+**Documentation**: See [docs/archive/TEST_IMPROVEMENTS_REPORT.md](docs/archive/TEST_IMPROVEMENTS_REPORT.md) for complete details.
 
 ## Security Implementation
 
@@ -923,7 +1368,7 @@ Additional safeguards:
 - Non-root user (uid 1000)
 - Workspace cleanup after execution
 
-**3. Anti-Cheating System** ([frontend/src/components/Playground.tsx](frontend/src/components/Playground.tsx))
+**3. Anti-Cheating System** ([Front/src/components/Playground.tsx](Front/src/components/Playground.tsx))
 
 Comprehensive academic integrity enforcement with two main components:
 
@@ -959,30 +1404,30 @@ The backend follows a **service layer pattern** to separate business logic from 
 
 ### Service Classes
 
-**ProblemService** ([backend/services/problem_service.py](backend/services/problem_service.py)):
+**ProblemService** ([Back/backend/services/problem_service.py](Back/backend/services/problem_service.py)):
 - `list_all()`, `get_problem_dir()`, `get_test_files()`, `load_rubric()`
 - `list_by_subject_and_unit()`, `group_by_subject_and_unit()`
 
-**SubjectService** ([backend/services/subject_service.py](backend/services/subject_service.py)):
+**SubjectService** ([Back/backend/services/subject_service.py](Back/backend/services/subject_service.py)):
 - `list_all_subjects()`, `get_subject()`, `list_units_by_subject()`
 - `get_hierarchy()`, `validate_subject_unit()`
 - Reads from subjects_config.json
 
-**SubmissionService** ([backend/services/submission_service.py](backend/services/submission_service.py)):
+**SubmissionService** ([Back/backend/services/submission_service.py](Back/backend/services/submission_service.py)):
 - `create_submission()`, `update_job_id()`, `get_by_job_id()`
 - `get_result_dict()`, `get_statistics()`, `list_submissions()`
 
-**DockerRunner** (worker/services/docker_runner.py):
+**DockerRunner** (Back/worker/services/docker_runner.py):
 - Handles Docker execution with path translation
 
-**RubricScorer** (worker/services/rubric_scorer.py):
+**RubricScorer** (Back/worker/services/rubric_scorer.py):
 - Applies scoring logic to test results
 
 ### Adding New Features
 
 Follow this pattern:
 
-1. **Create service class** in `backend/services/`:
+1. **Create service class** in `Back/backend/services/`:
 ```python
 from ..logging_config import get_logger
 logger = get_logger(__name__)
@@ -995,7 +1440,7 @@ class MyService:
 my_service = MyService()  # Singleton
 ```
 
-2. **Use in routes** (backend/app.py):
+2. **Use in routes** (Back/backend/app.py):
 ```python
 from .services.my_service import my_service
 
@@ -1004,126 +1449,80 @@ def my_endpoint(db: Session = Depends(get_db)):
     return my_service.do_something("value")
 ```
 
-3. **Add validation** (backend/validators.py)
-4. **Add exceptions** (backend/exceptions.py)
-5. **Add configuration** (backend/config.py)
+3. **Add validation** (Back/backend/validators.py)
+4. **Add exceptions** (Back/backend/exceptions.py)
+5. **Add configuration** (Back/backend/config.py)
 6. **Use structured logging**: `logger.info("Message", extra={"key": "value"})`
 
-## Performance Optimizations
+## Performance Optimizations (CRITICAL TO MAINTAIN)
 
-The codebase has been optimized for production performance. **Key optimizations to maintain**:
+### 1. N+1 Query Prevention (submission_service.py) - 100x improvement
 
-### 1. N+1 Query Prevention (submission_service.py)
-
-Always use eager loading when accessing relationships:
+Always use eager loading with `joinedload()` when accessing relationships:
 
 ```python
-from sqlalchemy.orm import joinedload
-
-# ✅ CORRECT - Eager loading avoids N+1 queries
+# ✅ CORRECT - Loads relationship in same query
 submission = db.query(Submission).options(
     joinedload(Submission.test_results)
 ).filter(Submission.job_id == job_id).first()
 
-# ❌ WRONG - Will cause N+1 queries
+# ❌ WRONG - N+1 queries (1 query + N queries for each relationship access)
 submission = db.query(Submission).filter(Submission.job_id == job_id).first()
-# Accessing submission.test_results later triggers additional queries
 ```
 
-**Impact**: 100x improvement (101 queries → 1 query with 100 submissions)
+### 2. Problem List Caching (problem_service.py) - 1000x improvement
 
-### 2. Problem List Caching (problem_service.py)
-
-Problem list is cached using `@lru_cache` to avoid repeated filesystem reads:
-
+Problem list uses `@lru_cache` to avoid repeated filesystem reads. **Remember to invalidate cache when adding/modifying problems**:
 ```python
-@lru_cache(maxsize=1)
-def _list_all_cached(self) -> Dict[str, Dict[str, Any]]:
-    """Cached version - reads filesystem once"""
-    # ... load problems from disk
-
-# When adding/modifying problems, invalidate cache:
 problem_service.invalidate_cache()
 ```
 
-**Impact**: ~1000x improvement on subsequent requests
+### 3. Compiled Regex Patterns (validators.py) - 2x improvement
 
-### 3. Compiled Regex Patterns (validators.py)
+Regex patterns compiled at module level. Don't recompile in functions.
 
-Regex patterns are compiled at module level for reuse:
-
-```python
-# ✅ CORRECT - Compile once at module level
-_WHITESPACE_PATTERN = re.compile(r'\s+')
-_PROBLEM_ID_PATTERN = re.compile(r'^[a-zA-Z0-9_-]+$')
-
-def validate_code_safety(code: str) -> None:
-    code_normalized = _WHITESPACE_PATTERN.sub('', code.lower())
-```
-
-**Impact**: 2x performance improvement in validation
-
-### 4. Configuration Best Practices
-
-**IMPORTANT**: Never hardcode paths. Always use settings:
+### 4. Never Hardcode Paths
 
 ```python
-# ✅ CORRECT
+# ✅ CORRECT - Uses settings
 from backend.config import settings
 problem_dir = pathlib.Path(settings.PROBLEMS_DIR) / problem_id
 
-# ❌ WRONG - Hardcoded path breaks in different environments
+# ❌ WRONG - Breaks in different environments
 problem_dir = pathlib.Path("/app/backend/problems") / problem_id
 ```
 
 ## Adding New Problems
 
-1. Choose subject/unit from [backend/subjects_config.json](backend/subjects_config.json)
-2. Create directory: `mkdir backend/problems/new_problem`
+1. Choose subject/unit from [Back/backend/subjects_config.json](Back/backend/subjects_config.json)
+2. Create directory: `mkdir Back/backend/problems/new_problem`
 3. Create 6 files: `prompt.md`, `starter.py`, `tests_public.py`, `tests_hidden.py`, `metadata.json`, `rubric.json`
 4. Fill metadata.json with subject_id and unit_id
 5. Test locally:
 
 ```bash
 # Submit test
-curl -X POST http://localhost:8000/api/submit \
+curl -X POST http://localhost:49000/api/submit \
   -H "Content-Type: application/json" \
   -d '{"problem_id": "new_problem", "code": "def my_func():\n    pass", "student_id": "test"}'
 
 # Check results
-curl http://localhost:8000/api/result/JOB_ID
+curl http://localhost:49000/api/result/JOB_ID | python -m json.tool
 
 # Verify hierarchy
-curl http://localhost:8000/api/problems/hierarchy | python -m json.tool
+curl http://localhost:49000/api/problems/hierarchy | python -m json.tool
 ```
 
 ## Common Tasks
 
-**Restart service after code changes:**
-```bash
-docker compose restart backend
-# Or rebuild if dependencies changed:
-docker compose up -d --build backend
-```
-
-**Reset database:**
-```bash
-docker compose down -v && docker compose up --build
-```
-
-**Change resource limits globally:**
-Edit `DEFAULT_TIMEOUT`, `DEFAULT_MEMORY_MB`, `DEFAULT_CPUS` in worker/tasks.py
-
-**Change resource limits per problem:**
-Edit problem's metadata.json (timeout_sec, memory_mb)
-
-**Test problem manually:**
-```bash
-docker run -it --rm -v $(pwd)/backend/problems/sumatoria:/workspace -w /workspace py-playground-runner:latest bash
-# Inside container:
-echo "def suma(a,b): return a+b" > student_code.py
-pytest -v tests_public.py
-```
+| Task | Command |
+|------|---------|
+| Restart service after code changes | `docker compose restart backend` |
+| Rebuild after dependency changes | `docker compose up -d --build backend` |
+| Reset database | `docker compose down -v && docker compose up --build` |
+| Change resource limits globally | Edit `DEFAULT_TIMEOUT`, `DEFAULT_MEMORY_MB`, `DEFAULT_CPUS` in worker/tasks.py |
+| Change resource limits per problem | Edit problem's metadata.json (timeout_sec, memory_mb) |
+| Invalidate problem cache | Call `problem_service.invalidate_cache()` after adding problems |
 
 ## Port Configuration
 
@@ -1149,12 +1548,19 @@ frontend:
 
 ## Troubleshooting
 
+**⚠️ MOST COMMON FIRST-TIME ERROR**: "Error response from daemon: No such image: py-playground-runner:latest"
+- **Cause**: You haven't built the runner image yet
+- **Solution**: `docker build -t py-playground-runner:latest ./Back/runner`
+- This image is required by the worker to execute student code in a sandbox
+- Must be built BEFORE running `docker compose up`
+
 **First-time startup is slow**: 5-10 minutes to download/build images. Monitor: `docker compose logs -f`
 
 **Port already in use**:
 ```bash
-# Windows: netstat -ano | findstr :8000 && taskkill /PID <PID> /F
-# Linux: lsof -i :8000 && kill -9 <PID>
+# Windows: netstat -ano | findstr :49000 && taskkill /PID <PID> /F
+# Linux: lsof -i :49000 && kill -9 <PID>
+# Or for frontend: findstr :49173 (Windows) / lsof -i :49173 (Linux)
 ```
 
 **Worker can't access Docker daemon**:
@@ -1162,9 +1568,19 @@ frontend:
 - Windows: Verify Docker Desktop uses WSL 2
 - Linux: Add user to docker group: `sudo usermod -aG docker $USER && newgrp docker`
 
-**Runner image not found**: `docker build -t py-playground-runner:latest ./runner`
+**Runner image not found**: `docker build -t py-playground-runner:latest ./Back/runner`
 
-**ModuleNotFoundError**: Dockerfile COPY paths incorrect. Use `backend/requirements.txt` not `requirements.txt`. Rebuild: `docker compose build --no-cache backend`
+**ModuleNotFoundError: No module named 'common'**:
+- Cause: Docker image built before common/ module was created
+- Solution: Rebuild images with `docker compose build --no-cache backend worker`
+- Both backend and worker Dockerfiles must COPY common/ directory
+
+**ModuleNotFoundError: No module named 'backend'**:
+- Cause: Using old import paths (from backend.config) instead of new common module
+- Solution: Update imports to `from common.config import settings`
+- Correct paths: `common.config`, `common.database`, `common.models`, `common.logging_config`
+
+**ModuleNotFoundError (general)**: Dockerfile COPY paths incorrect. Use `backend/requirements.txt` not `requirements.txt`. Rebuild: `docker compose build --no-cache backend`
 
 **Tests timing out**: Increase timeout_sec in metadata.json or DEFAULT_TIMEOUT in worker/tasks.py
 
@@ -1172,9 +1588,21 @@ frontend:
 
 **RQ worker not processing**: Check Redis: `docker compose exec redis redis-cli ping`
 
+**Frontend TypeScript errors (import.meta.env)**:
+- Error: `Property 'env' does not exist on type 'ImportMeta'`
+- Cause: Missing `vite-env.d.ts` file
+- Solution: Ensure `Front/src/vite-env.d.ts` exists with proper type definitions
+- If missing, create file with ImportMeta and ImportMetaEnv interfaces
+
+**Frontend ESLint/Prettier issues**:
+- Run `npm run lint:fix` to auto-fix most issues
+- Run `npm run format` to format all files
+- Check `.eslintrc.json` and `.prettierrc.json` for configuration
+- If errors persist, reinstall dependencies: `rm -rf node_modules && npm install`
+
 ## Refactoring Status
 
-See [REFACTORING_COMPLETE.md](REFACTORING_COMPLETE.md) for detailed progress.
+All major refactoring completed. See [docs/archive/REFACTORING_COMPLETE.md](docs/archive/REFACTORING_COMPLETE.md) for historical details.
 
 **Completed**:
 - ✅ Phase 1 (100%): Core infrastructure (config, logging, validation, exceptions)
@@ -1192,29 +1620,42 @@ See [REFACTORING_COMPLETE.md](REFACTORING_COMPLETE.md) for detailed progress.
 
 ## Frontend Architecture
 
-**TypeScript Migration** ✅ (Completed: 25 Oct 2025)
+**TypeScript Migration** ✅ (Completed: Oct 2025)
 - Migrated from JavaScript to TypeScript for improved type safety
 - Centralized API types in `src/types/api.ts`
 - All components fully typed with interfaces
+- Created `vite-env.d.ts` for proper import.meta.env type definitions
+
+**Code Quality Tooling** ✅ (Completed: Nov 2025)
+- **ESLint**: Configured with TypeScript, React, and React Hooks plugins
+- **Prettier**: Consistent code formatting with .prettierrc.json configuration
+- **Type Safety**: All TypeScript compilation errors resolved (0 errors)
+- **Linting**: All code passes ESLint with 0 warnings
+- **Configuration Files**: `.eslintrc.json`, `.prettierrc.json`, `.prettierignore`
 
 **Components**:
 - **App.tsx** - Tab navigation (Ejercicios, Panel Docente)
 - **Playground.tsx** - Student interface with cascading dropdowns, Monaco editor, result polling with AbortController
 - **AdminPanel.tsx** - Instructor dashboard
+- **LanguageLogo.tsx** - Dynamic logos based on subject
 - **types/api.ts** - TypeScript interfaces for all API requests/responses
+- **config.ts** - Centralized configuration with environment variables
 
 **Features**:
 - Monaco Editor for Python syntax highlighting
 - Code persisted to localStorage
 - Full TypeScript type checking with strict mode
 - Type-safe API calls with Axios
+- Anti-cheating system (anti-paste + tab monitoring)
+- Progressive hint system (4 levels)
 
 **Tech Stack**:
 - React 18 with TypeScript
-- Vite 6 for build tooling
-- Monaco Editor for code editing
+- Vite 6 for build tooling and dev server
+- Monaco Editor for code editing (VS Code engine)
 - Axios for HTTP requests
-- TypeScript strict mode enabled
+- ESLint 8 + Prettier 3 for code quality
+- TypeScript 5 with strict mode enabled
 
 **Development Workflow**:
 ```bash
@@ -1222,7 +1663,19 @@ See [REFACTORING_COMPLETE.md](REFACTORING_COMPLETE.md) for detailed progress.
 npm run dev
 
 # Type check without compiling
-npx tsc --noEmit
+npm run type-check
+
+# Lint code (check for issues)
+npm run lint
+
+# Lint and auto-fix
+npm run lint:fix
+
+# Format code with Prettier
+npm run format
+
+# Check if code is formatted
+npm run format:check
 
 # Build for production
 npm run build
@@ -1246,9 +1699,103 @@ npm run preview
      // ...
    }
    ```
+4. Run type-check and linting before committing:
+   ```bash
+   npm run type-check && npm run lint && npm run format
+   ```
 
 **Adding New API Types**:
-Edit `frontend/src/types/api.ts` and add/export new interfaces. Types are automatically available throughout the app.
+Edit `Front/src/types/api.ts` and add/export new interfaces. Types are automatically available throughout the app.
+
+**Code Quality Best Practices**:
+- **Always run `npm run type-check`** before committing to catch TypeScript errors
+- **Use `npm run lint:fix`** to automatically fix most linting issues
+- **Run `npm run format`** to ensure consistent code style
+- **Import types properly**: Use interfaces from `src/types/api.ts` for API responses
+- **Avoid `any` type**: ESLint warns about explicit `any` - use specific types instead
+- **Follow React Hooks rules**: ESLint enforces hooks rules (exhaustive-deps, rules-of-hooks)
+
+## Production Deployment
+
+### Deploy to Render.com (Backend)
+
+The backend is **fully configured** for deployment to Render.com with Gunicorn.
+
+**Deployment Files** (located in `Back/`):
+- `Procfile` - Start commands for web and worker services (with `cd Back`)
+- `runtime.txt` - Python 3.11.9
+- `requirements.txt` - Combined dependencies with Gunicorn
+- `render.yaml` - Complete service configuration
+- `start-render.sh` - Startup script with DB initialization
+- `RENDER_QUICKSTART.md` - ⭐ **Step-by-step deployment guide**
+- `RENDER_TROUBLESHOOTING.md` - ⭐ **Common errors and solutions**
+- `RENDER_ENV_VARS.txt` - Environment variables template
+- `DEPLOY_RENDER.md` - Comprehensive deployment documentation
+
+**Quick Deploy Steps**:
+
+1. **Create Services on Render**:
+   - PostgreSQL Database (Free tier)
+   - Redis (use Upstash.com free tier - Render doesn't offer free Redis)
+   - Web Service (Backend API)
+   - Background Worker (RQ Worker)
+
+2. **Configure Web Service**:
+   - **Root Directory**: `Back`
+   - **Build Command**: `cd Back && pip install -r requirements.txt`
+   - **Start Command**: `cd Back && gunicorn backend.app:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT`
+
+3. **Configure Environment Variables** (in both Web Service and Worker):
+   ```env
+   DATABASE_URL=postgresql://user:pass@host/db
+   REDIS_URL=redis://default:pass@host:port
+   CORS_ORIGINS=https://front-eight-rho-61.vercel.app
+   ```
+
+**⚠️ CRITICAL**: The `cd Back` in Start Command is essential to avoid `ModuleNotFoundError: No module named 'app'`
+
+**CORS Configuration**:
+Backend is pre-configured for Vercel frontend at `https://front-eight-rho-61.vercel.app`
+
+**Important Limitation**:
+- Docker is **NOT available** on Render Free Tier
+- Backend API will work perfectly (problems, hierarchy, admin panel)
+- Code execution (runner/sandbox) will NOT work
+- Solutions: Use Railway.app/Fly.io for runner, or deploy to VPS with Docker
+
+**Common Deployment Errors**:
+
+- **ModuleNotFoundError: No module named 'app'**
+  - Cause: Missing `cd Back` in Start Command
+  - Fix: Ensure Start Command is: `cd Back && gunicorn backend.app:app ...`
+  - See `Back/RENDER_TROUBLESHOOTING.md` for full solutions
+
+- **ModuleNotFoundError: No module named 'common'**
+  - Cause: Python can't find the common module
+  - Fix: Use `cd Back` in Start Command OR set `PYTHONPATH=/opt/render/project/src/Back`
+
+- **Database connection failed**
+  - Cause: Wrong DATABASE_URL
+  - Fix: Use Render PostgreSQL's **Internal Database URL** (not External)
+
+**Complete Documentation**:
+- Quick Start: `Back/RENDER_QUICKSTART.md`
+- Troubleshooting: `Back/RENDER_TROUBLESHOOTING.md` ⭐ **Common errors and solutions**
+- Full Guide: `Back/DEPLOY_RENDER.md`
+
+### Deploy to Vercel (Frontend)
+
+Frontend is already deployed at: `https://front-eight-rho-61.vercel.app`
+
+**To redeploy with updated backend URL**:
+
+1. Go to Vercel Dashboard → Project Settings → Environment Variables
+2. Update: `VITE_API_URL=https://your-backend.onrender.com`
+3. Redeploy from Deployments tab
+
+**Development Configuration**:
+- `Front/.env` contains `VITE_API_URL=http://localhost:49000` for local development
+- Frontend automatically uses this URL when running `npm run dev`
 
 ## Extension Points
 

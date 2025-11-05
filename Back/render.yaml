@@ -1,0 +1,59 @@
+services:
+  # FastAPI Backend
+  - type: web
+    name: python-playground-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd /opt/render/project/src && gunicorn backend.app:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: python-playground-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: python-playground-redis
+          type: redis
+          property: connectionString
+      - key: CORS_ALLOW_ALL_ORIGINS
+        value: "false"
+      - key: CORS_ORIGINS
+        value: "https://front-eight-rho-61.vercel.app"
+      - key: PYTHONPATH
+        value: "/opt/render/project/src/Back"
+      - key: RUNNER_IMAGE
+        value: "py-playground-runner:latest"
+      - key: WORKSPACE_DIR
+        value: "/tmp/workspaces"
+
+  # RQ Worker
+  - type: worker
+    name: python-playground-worker
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd /opt/render/project/src && python -m rq.cli worker submissions --url $REDIS_URL
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: python-playground-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: python-playground-redis
+          type: redis
+          property: connectionString
+      - key: PYTHONPATH
+        value: "/opt/render/project/src/Back"
+      - key: RUNNER_IMAGE
+        value: "py-playground-runner:latest"
+      - key: WORKSPACE_DIR
+        value: "/tmp/workspaces"
+
+databases:
+  - name: python-playground-db
+    databaseName: playground
+    user: playground
+    plan: free
+
+# Note: Redis will need to be added as a separate service in Render dashboard
+# Render doesn't support Redis in render.yaml on free tier

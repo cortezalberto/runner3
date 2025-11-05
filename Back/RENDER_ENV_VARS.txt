@@ -1,0 +1,51 @@
+# Variables de Entorno para Render.com
+# Copia estas variables en el dashboard de Render (Web Service Y Worker)
+
+# =================================================================
+# IMPORTANTE: Reemplaza los valores con tus credenciales reales
+# =================================================================
+
+# Database (Render PostgreSQL - Internal Database URL)
+# Obtén esto desde: Render Dashboard → PostgreSQL → Info → Internal Database URL
+# Formato: postgresql://user:password@hostname.render.com/database_name
+DATABASE_URL=postgresql://playground:CAMBIAR_PASSWORD@tu-db-host.render.com/playground
+
+# Redis (Upstash Redis URL)
+# Render NO ofrece Redis gratis. Usa Upstash: https://console.upstash.com/
+# Formato: redis://default:password@hostname.upstash.io:port
+REDIS_URL=redis://default:CAMBIAR_PASSWORD@tu-redis-host.upstash.io:6379
+
+# CORS - Frontend de Vercel (SIN trailing slash, HTTPS obligatorio)
+CORS_ORIGINS=https://front-eight-rho-61.vercel.app
+CORS_ALLOW_ALL_ORIGINS=false
+
+# Python Path (OPCIONAL - solo si NO usas 'cd Back' en Start Command)
+# Si tu Start Command incluye "cd Back && ...", esta variable NO es necesaria
+PYTHONPATH=/opt/render/project/src/Back
+
+# =================================================================
+# ⚠️ LIMITACIÓN CRÍTICA: Docker NO disponible en Render
+# =================================================================
+# Render.com free tier NO soporta Docker.
+# Esto significa que:
+# ✅ El API funcionará (ver problemas, jerarquía)
+# ❌ La ejecución de código NO funcionará (requiere Docker sandbox)
+#
+# Los estudiantes verán un mensaje explicativo al enviar código:
+# "La ejecución de código NO está disponible en Render.com"
+#
+# Para ejecución de código completa, considera:
+# - Railway.com ($5/mes, soporta Docker)
+# - Fly.io (con Docker runtime)
+# - DigitalOcean App Platform (con Docker)
+# - VPS propio con Docker instalado
+# =================================================================
+
+# =================================================================
+# Notas Importantes:
+# =================================================================
+# 1. DATABASE_URL debe ser la "Internal Database URL" (termina en .render.com)
+# 2. REDIS_URL debe ser de Upstash (Render no ofrece Redis gratis)
+# 3. CORS_ORIGINS debe ser HTTPS y sin trailing slash
+# 4. Las mismas variables deben estar en Web Service Y Worker
+# 5. El sistema funcionará pero SIN ejecución de código

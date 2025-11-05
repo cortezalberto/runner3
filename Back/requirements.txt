@@ -1,0 +1,26 @@
+# Python Playground - Backend Requirements
+# Combined requirements for backend and common modules
+
+# FastAPI and server
+fastapi==0.115.2
+uvicorn[standard]==0.30.6
+gunicorn==23.0.0
+
+# Validation
+pydantic==2.9.2
+
+# Database
+sqlalchemy==2.0.35
+psycopg2-binary==2.9.10
+
+# Redis and Queue
+redis==5.2.0
+rq==2.0.0
+
+# Configuration
+python-dotenv==1.0.1
+
+# Testing (development)
+pytest==8.3.3
+pytest-cov==6.0.0
+pytest-mock==3.14.0
